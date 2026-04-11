@@ -12,7 +12,7 @@
     </insert>
 
 
-    <update id="update">
+    <update id="update" parameterType="Setmeal">
         update setmeal
         <set>
             <if test="categoryId != null">category_id = #{categoryId},</if>
