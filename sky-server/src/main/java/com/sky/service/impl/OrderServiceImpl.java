@@ -174,9 +174,9 @@ public class OrderServiceImpl implements OrderService {
         //通过websocket向客户端浏览器推送消息 type orderId content
         Orders orders = new Orders();
         Map map = new HashMap();
-        map.put("type",1);
-        map.put("orderId",orders.getId());
-        map.put("content","订单号："+orders.getNumber());
+        map.put("type", 1);
+        map.put("orderId", orders.getId());
+        map.put("content", "订单号：" + orders.getNumber());
         String json = JSON.toJSONString(map);
         webSocketServer.sendToAllClient(json);
 
@@ -627,5 +627,19 @@ public class OrderServiceImpl implements OrderService {
      */
     //todo
     public void reminder(Long id) {
+        // 根据id查询订单
+        Orders ordersDB = orderMapper.getById(id);
+
+        // 校验订单是否存在，并且状态为4
+        if (ordersDB == null) {
+            throw new OrderBusinessException(MessageConstant.ORDER_STATUS_ERROR);
+        }
+
+        Map map = new HashMap();
+        map.put("type", 2); //1表示来单提醒，2表示催单
+        map.put("orderId", id);
+        map.put("content", "订单号:" + ordersDB.getNumber());
+        //通过websocket向商家端浏览器发送消息
+        webSocketServer.sendToAllClient(JSON.toJSONString(map));
     }
 }
