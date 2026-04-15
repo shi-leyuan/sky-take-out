@@ -57,4 +57,10 @@ sky:
     access-key-secret: ${sky.alioss.access-key-secret}
     bucket-name: ${sky.alioss.bucket-name}
 
+  shop:
+    address: 北京市海淀区上地十街10号
+
+  baidu:
+    ak: Rxf7Se9XvGz8RZNCK8UQTn94STCfSaJD
+
 
