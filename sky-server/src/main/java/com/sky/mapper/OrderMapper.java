@@ -85,7 +85,7 @@ public interface OrderMapper {
      *
      * @return
      */
-    Double subByMap(Map map);
+    Double sumByMap(Map map);
 
 
     /**
@@ -105,4 +105,5 @@ public interface OrderMapper {
      * @return
      */
     List<GoodsSalesDTO> getSalesTop10(LocalDateTime begin, LocalDateTime end);
+
 }
